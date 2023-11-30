@@ -6,4 +6,4 @@ The basic workflow was as follows:
  - Analysis using C++ scripts
  - Final analysis using Python
 
-Primarily to save myself the effort of running expensive computations again, the lammps-cpp-scripts folder already contains the simulation outputs. This enables the user to simply download the folder, compile the C++ files, and then move to the post-processing using Python.
+Primarily to save myself the effort of running expensive computations again, the lammps-cpp-scripts folder already contains the simulation outputs. This enables the user to simply download the folder, compile the C++ files, and then move to the post-processing using Python. The xv.dump file to visualise the system in Ovito is unfortunately too large to upload, and will require re-running the simulations.
