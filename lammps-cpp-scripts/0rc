@@ -1,0 +1,36 @@
+units cgs	
+atom_style sphere
+variable R file R
+variable Lz equal 1.0
+variable th equal 25*PI/180
+variable gx equal sin(${th})
+variable gy equal -cos(${th})
+
+
+boundary f f p
+region box block -$R $R -$R $R 0 ${Lz}
+create_box 1 box
+read_data pos0.data add append
+neighbor 0.03 bin
+neigh_modify binsize 0.15 every 5
+
+comm_modify vel yes
+
+pair_style gran/hooke/history 2568000.0 NULL 4952.0 0.0 0.5 0
+pair_coeff * *
+
+timestep 1e-5
+
+fix 1 all nve/sphere
+fix 2 all gravity 981 vector ${gx} ${gy} 0
+fix 3 all wall/gran hooke/history 2568000.0 NULL 4952.0 0.0 0.5 0 zcylinder ${R} shear x 0.025
+
+dump 1 all custom 1000 xv.dump id radius x y z vx vy vz
+thermo 1000
+thermo_style custom step atoms ke
+
+run_style verlet
+run 200000
+
+write_restart rsrc.inp
+

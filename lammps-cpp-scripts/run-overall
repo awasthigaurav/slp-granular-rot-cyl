@@ -1,0 +1,11 @@
+gcc ini.c -o ini -lm
+./ini
+mpirun -np 4 lmp -in 0rc
+mpirun -np 4 lmp -in 1rc
+gcc clc.c -o clc -lm
+./clc
+./rn
+gcc avg.c -o avg -lm
+./avg
+gnuplot pl.gnu
+gnuplot pl2.gnu
